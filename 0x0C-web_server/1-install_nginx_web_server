@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Install Nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Replace the default HTML content with Hello World!
+echo "Hello World!" > /var/www/html/index.html
+
+# Start nginx without using systemctl
+service nginx start

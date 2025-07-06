@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Update package index and install nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Create custom index page
+echo "Hello World!" > /var/www/html/index.html
+
+# Add 301 redirection to the default Nginx config
+sed -i '/location \/ {/a \    location \/redirect_me {\n        return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n    }' /etc/nginx/sites-available/default
+
+# Start Nginx without systemctl
+service nginx start || /etc/init.d/nginx start
